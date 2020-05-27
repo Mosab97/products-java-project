@@ -2,18 +2,18 @@ package pkgfinal.project.lab;
 
 public class Weighted extends Product {
 
-    private double weight;
+    private int weight;
 
-    public Weighted(double weight, int Id, String Name, String Description, double price) {
+    public Weighted(int weight, int Id, String Name, String Description, int price) {
         super(Id, Name, Description, price);
         this.weight = weight;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
@@ -23,7 +23,7 @@ public class Weighted extends Product {
     }
 
     @Override
-    public double calcPay() {
+    public int calcPay() {
         return this.getPrice() * this.getWeight();
 
     }

@@ -6,17 +6,17 @@ public abstract class Product {
     private int Id;
     private String Name;
     private String Description;
-    private double price;
+    private int price;
     
     
-    public abstract double calcPay();
+    public abstract int calcPay();
 
     @Override
     public String toString() {
         return "Product{" + "Id=" + Id + ", Name=" + Name + ", Description=" + Description + ", price=" + price + '}';
     }
 
-    public Product(int Id, String Name, String Description, double price) {
+    public Product(int Id, String Name, String Description, int price) {
         this.Id = Id;
         this.Name = Name;
         this.Description = Description;
@@ -47,11 +47,11 @@ public abstract class Product {
         this.Description = Description;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

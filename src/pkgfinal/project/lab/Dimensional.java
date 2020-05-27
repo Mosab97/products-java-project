@@ -2,28 +2,28 @@ package pkgfinal.project.lab;
 
 public class Dimensional extends Product {
 
-    private double width;
-    private double length;
+    private int width;
+    private int length;
 
-    public Dimensional(double width, double length, int Id, String Name, String Description, double price) {
+    public Dimensional(int width, int length, int Id, String Name, String Description, int price) {
         super(Id, Name, Description, price);
         this.width = width;
         this.length = length;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
@@ -33,7 +33,7 @@ public class Dimensional extends Product {
     }
 
     @Override
-    public double calcPay() {
+    public int calcPay() {
         return this.getLength() * this.getWidth() * this.getPrice();
     }
 
