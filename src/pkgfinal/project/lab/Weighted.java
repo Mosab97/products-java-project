@@ -4,7 +4,7 @@ public class Weighted extends Product {
 
     private int weight;
 
-    public Weighted(int weight, int Id, String Name, String Description, int price) {
+    public Weighted(int Id, String Name, String Description,int weight,  int price) {
         super(Id, Name, Description, price);
         this.weight = weight;
     }
@@ -19,7 +19,12 @@ public class Weighted extends Product {
 
     @Override
     public String toString() {
-        return "Weighted{" + "weight=" + weight + '}';
+                return "Product{" + "id = " + this.getId() + ", name = " + this.getName() + ", description = " + this.getDescription() + ", price = " + this.getPrice() + ", Weight = " + this.getWeight()  + "}";
+
+    }
+    
+        public String toStringFile() {
+        return  this.getId() + "," + this.getName() + "," + this.getDescription() + "," + this.getPrice() + "," + weight + ",W";
     }
 
     @Override

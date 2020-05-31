@@ -1,29 +1,63 @@
 package pkgfinal.project.lab;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
 
+    public static Product readProductFromkeyboard(char DorW) {
+        Product pro = null;
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter your product id: ");
+        int productId = input.nextInt();
+
+        System.out.print("Enter your product name: ");
+        String productName = input.next();
+
+        System.out.print("Enter your product descrtiption: ");
+        String productDesc = input.next();
+
+        System.out.print("Enter your product price: ");
+        int productPrice = input.nextInt();
+
+        if (DorW == 'D') {
+
+            System.out.print("Enter your product length: ");
+            int productLength = input.nextInt();
+
+            System.out.print("Enter your product width: ");
+            int productWidth = input.nextInt();
+
+            pro = new Dimensional(productId, productName, productDesc, productWidth, productLength, productPrice);
+
+        } else {
+
+            System.out.print("Enter your product weight: ");
+            int productWeight = input.nextInt();
+            pro = new Weighted(productId, productName, productDesc, productWeight, productPrice);
+
+        }
+        return pro;
+    }
+
     public static void main(String[] args) {
 
-        Dimensional d1 = new Dimensional(22, 12, 22, "D1", "des1", 34);
-        Dimensional d2 = new Dimensional(22, 12, 22, "D2", "des2", 34);
-
-        Weighted w1 = new Weighted(23, 23, "w1", "des1", 34);
-        Weighted w2 = new Weighted(23, 23, "w2", "des2", 34);
-
-        Product[] products = new Product[100];
-
-        products[0] = d1;
-        products[1] = d2;
-        products[2] = w1;
-        products[3] = w2;
-
+        ArrayList<Product> products = FileReader.readFromFile();
+//        System.out.println(products.size());
         Scanner input = new Scanner(System.in);
         int selectedChoice = 0;
-        char selectedPoductType = 'd';
-        while (true) {
+        int productId = 0;
 
+        char selectedPoductType = 'd';
+          while (true) {
+              try{
+    
             System.out.println("1- Show All Products");
             System.out.println("2- Add Product");
             System.out.println("3- Delete Product");
@@ -35,29 +69,26 @@ public class Main {
             selectedChoice = input.nextInt();
             switch (selectedChoice) {
                 case 1:
+//                    Product products[] = FileReader.readFromFile();
 
                     System.out.print("Enter product type (D/W):");
                     selectedPoductType = input.next().charAt(0);
                     switch (selectedPoductType) {
                         case 'D':
-                            for (int i = 0; i < 4; i++) {
-                                if (products[i] instanceof Dimensional) {
-                                    System.out.println(products[i].toString());;
 
+                            for (Product product : products) {
+                                if (product instanceof Dimensional) {
+                                    System.out.println(product.toString());;
                                 }
-
                             }
-
                             break;
-
                         case 'W':
-                            for (int i = 0; i < 4; i++) {
-                                if (products[i] instanceof Weighted) {
-                                    System.out.println(products[i].toString());;
-
+                            for (Product product : products) {
+                                if (product instanceof Weighted) {
+                                    System.out.println(product.toString());;
                                 }
-
                             }
+
                             break;
                         default:
                             System.err.println("wrong choice you have to choice D or W!!!");
@@ -67,27 +98,107 @@ public class Main {
                     break;
 
                 case 2:
+                    System.out.print("Enter product type (D/W):");
+                    selectedPoductType = input.next().charAt(0);
+                    switch (selectedPoductType) {
+                        case 'D':
+
+                            Product res1 = readProductFromkeyboard('D');
+                            products.add(res1);
+                            System.out.println(res1.getName());
+                            ;
+                            break;
+                        case 'W':
+
+                            Product res2 = readProductFromkeyboard('D');
+
+                            break;
+                        default:
+                            System.err.println("wrong choice you have to choice D or W!!!");
+
+                    }
+
                     System.out.println("chocie 2");
                     break;
 
                 case 3:
-                    System.out.println("chocie 3");
+                    System.out.print("Enter product id: ");
+                    productId = input.nextInt();
+                    Product p = null;
+                    for (Product product : products) {
+                        if (product.getId() == productId) {
+                            p = product;
+                        }
+                    }
+                    products.remove(p);
+
+                    System.out.println("deleted ^-^");
                     break;
 
                 case 4:
-                    System.out.println("chocie 4");
+                    System.out.print("Enter product id: ");
+                    productId = input.nextInt();
+                    Product p2 = null;
+                    for (Product product : products) {
+                        if (product.getId() == productId) {
+                            p2 = product;
+                        }                        }
+
+                        products.remove(p2);
+
+                        System.out.println(p2.toString());
+
+                        switch ((p2 instanceof Weighted) ? 'W' : 'D') {
+                            case 'D':
+
+                                Product res1 = readProductFromkeyboard('D');
+                                products.add(res1);
+                                System.out.println(res1.getName());
+                                ;
+                                break;
+                            case 'W':
+
+                                Product res2 = readProductFromkeyboard('D');
+
+                                break;
+                            default:
+                                System.err.println("wrong choice you have to choice D or W!!!");
+
+                        }
+
+                        System.out.println("chocie 2");
+                        break;
+
+                    
+            
+        
+    
+
+case 5:
+    int total = 0;
+    for (Product pro : products) {
+total += pro.calcPay();
+    }
+    System.out.println("total price: "  + total);
                     break;
 
-                case 5:
-                    System.out.println("chocie 5");
-                    break;
+       case 6:
+                        String FilePath = "C:\\Users\\Mosab\\Documents\\NetBeansProjects\\final-project-lab\\src\\pkgfinal\\project\\lab\\data.txt";
+                       PrintWriter writer;
+                writer = new PrintWriter(FilePath, "UTF-8");
+                 for (Product product : products) {
+                            writer.println(product.toStringFile());
 
-                case 6:
-                    System.out.println("chocie 6");
-                    break;
-
+                        }
+                        writer.close();
+       
+                        System.out.println("chocie 6");
+                        break;
+                    
                 case 7:
-                    System.out.println("chocie 7");
+                                        System.out.println("by by...");
+
+                    System.exit(0);
                     break;
 
                 default:
@@ -95,6 +206,16 @@ public class Main {
 
             }
         }
+
+              catch (FileNotFoundException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }catch(java.util.InputMismatchException ex){
+                System.err.println("enter a numric value??");
+            }
+                       }
+      
 //        System.err.println("test");
     }
 

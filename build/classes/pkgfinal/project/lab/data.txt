@@ -1,4 +1,4 @@
-1,name1,desc1,100,50,50,D
-2,name2,desc2,50,12,W
-3,name3,desc3,30,20,W
-4,name4,desc4,80,60,55,D
+1,name1,desc1,50,100,50,D
+2,name2,desc2,12,50,W
+3,name3,desc3,20,30,W
+4,name4,desc4,55,80,60,D

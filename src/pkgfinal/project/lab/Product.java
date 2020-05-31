@@ -9,12 +9,16 @@ public abstract class Product {
     private int price;
     
     
-    public abstract int calcPay();
+    public abstract int calcPay();    
+    
+    public abstract String toStringFile();
+
 
     @Override
     public String toString() {
         return "Product{" + "Id=" + Id + ", Name=" + Name + ", Description=" + Description + ", price=" + price + '}';
     }
+    
 
     public Product(int Id, String Name, String Description, int price) {
         this.Id = Id;

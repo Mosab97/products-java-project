@@ -5,7 +5,7 @@ public class Dimensional extends Product {
     private int width;
     private int length;
 
-    public Dimensional(int width, int length, int Id, String Name, String Description, int price) {
+    public Dimensional( int Id,String Name, String Description, int width, int length, int price) {
         super(Id, Name, Description, price);
         this.width = width;
         this.length = length;
@@ -29,7 +29,11 @@ public class Dimensional extends Product {
 
     @Override
     public String toString() {
-        return "Dimensional{" + "width=" + width + ", length=" + length + '}';
+        return "Product{" + "id = " + this.getId() + ", name = " + this.getName() + ", description = " + this.getDescription() + ", price = " + this.getPrice() + ", width=" + width + ", length=" + length + "}";
+    }
+    
+        public String toStringFile() {
+        return  this.getId() + "," + this.getName() + "," + this.getDescription() + "," + this.getPrice() + "," + width + "," + length + ",D";
     }
 
     @Override
